@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TranscriptUploader from "./TranscriptUploader";
+import MultiStudent from "./MultiStudent";
 import "./App.css";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
             case "singleStudent":
                 return <div className="content fade-in"><p>Single Student Page</p></div>;
             case "multiStudent":
-                return <div className="content fade-in"><p>Multi Student Page</p></div>;
+                return <div className="content fade-in"><MultiStudent /></div>;
             default:
                 return null;
         }

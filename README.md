@@ -8,6 +8,7 @@ This project is designed to help students and educators analyze academic perform
 - Extract and display grades for each academic year.
 - Check and display graduation requirements and student progress.
 - Dark mode and light mode support.
+- Multi-student transcript processing.
 
 ## Installation
 To install the project, follow these steps:
@@ -38,6 +39,7 @@ To use the project, follow these steps:
     ```
 3. Open your web browser and navigate to `http://localhost:3000`.
 4. Upload a transcript PDF to analyze grades and graduation requirements.
+5. For multi-student processing, upload a folder of transcript PDFs.
 
 ## Contributing
 If you would like to contribute to this project, please follow these guidelines:
