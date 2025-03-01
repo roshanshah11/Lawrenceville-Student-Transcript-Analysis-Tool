@@ -29,7 +29,7 @@ To install the project, follow these steps:
 To use the project, follow these steps:
 1. Start the backend server:
     ```bash
-    python server.py
+    python routes.py
     ```
 2. Start the frontend application:
     ```bash
