@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TranscriptUploader from "./TranscriptUploader";
 import MultiStudent from "./MultiStudent";
+import Greeting from "./Greeting"; // Import the new Greeting component
 import "./App.css";
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
         <div className="App">
             <header className={`App-header slide-down ${darkMode ? "dark-mode" : ""}`}>
                 <h1>Python Final Project: By Tun and Roshan</h1>
-                <div className="greeting">Hi, User!</div>
+                <Greeting /> {/* Use the new Greeting component */}
                 <button onClick={() => setDarkMode(!darkMode)}>
                     {darkMode ? "Light Mode" : "Dark Mode"}
                 </button>
