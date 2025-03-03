@@ -365,11 +365,13 @@ def init_routes(app):
         file = request.files['file']
         if file.filename == '':
             return jsonify({"error": "No selected file"})
-
+        
         if file:
-            file.save(file.filename)
+            base_filename = os.path.basename(file.filename)
+            file_path = os.path.join(UPLOAD_FOLDER, base_filename)
+            file.save(file_path)
             output_filename = "extracted_transcript.txt"
-            extracted_data = extract_transcript_data(file.filename, output_filename)
+            extracted_data = extract_transcript_data(file_path, output_filename)
             grades_dict = parse_grades(output_filename)
             graduation_check = check_graduation_requirements(grades_dict)
             clear_uploads_folder()
