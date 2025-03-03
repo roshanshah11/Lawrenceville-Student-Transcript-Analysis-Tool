@@ -10,6 +10,7 @@ matplotlib.use('Agg')  # Use non-GUI backend
 import matplotlib.pyplot as plt
 from werkzeug.utils import secure_filename
 import logging  # Add this import
+import shutil
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -343,6 +344,18 @@ def init_routes(app):
             "progress": progress_data,
             "met_all_requirements": met_all_requirements
         }
+    def clear_uploads_folder():
+        """Clears all files from the UPLOAD_FOLDER."""
+        for filename in os.listdir(UPLOAD_FOLDER):
+            file_path = os.path.join(UPLOAD_FOLDER, filename)
+            try:
+                if os.path.isfile(file_path) or os.path.islink(file_path):
+                    os.unlink(file_path)
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path) #removes directories as well.
+            except Exception as e:
+                print(f'Failed to delete {file_path}. Reason: {e}')
+        
 
     @app.route('/extract-grades', methods=['POST'])
     def extract_grades():
@@ -359,6 +372,7 @@ def init_routes(app):
             extracted_data = extract_transcript_data(file.filename, output_filename)
             grades_dict = parse_grades(output_filename)
             graduation_check = check_graduation_requirements(grades_dict)
+            clear_uploads_folder()
             return jsonify({"grades": grades_dict, "graduation_check": graduation_check})
         return jsonify({"message": "Files successfully uploaded"}), 200
 
@@ -404,6 +418,7 @@ def init_routes(app):
                 # Log file path to verify it's correct
                 print(f"Processing file: {file_path}")
                 results[file] = extract_multi_grades(file_path)
+            clear_uploads_folder()
             return jsonify(results), 200
         except Exception as e:
             # Catch and return the actual error message
@@ -418,7 +433,7 @@ def init_routes(app):
 
             cdata, cdata_course = unpack_all(files)
             img = get_histogram_image(cdata, cdata_course)
-            
+            clear_uploads_folder()
             return send_file(img, mimetype='image/png')
         
         except Exception as e:

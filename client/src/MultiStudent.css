@@ -1,3 +1,4 @@
+/* General container styles */
 .multi-student-container {
     padding: 20px;
     max-width: 1200px;
@@ -32,29 +33,7 @@
     align-items: center;
     gap: 5px;
 }
-.result-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
 
-.result-card.expanded {
-    background-color: #f9f9f9;
-}
-
-.additional-data {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.result-card.expanded .additional-data {
-    max-height: 500px; /* Adjust based on your content */
-    margin-top: 16px;
-}
 .submit-button {
     background-color: #007bff;
     color: white;
@@ -81,14 +60,70 @@
     margin-top: 20px;
 }
 
-.result-card {
+/* Styles for valid results (clickable cards) */
+.result-card.valid {
     background-color: #ffffff;
     border: 1px solid #dee2e6;
     border-radius: 4px;
     padding: 15px;
     margin-bottom: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+.result-card.valid:hover {
+    background-color: #f0f0f0; /* Gray hover effect for valid cards */
+}
+
+.result-card.valid.expanded {
+    background-color: #f9f9f9;
+}
+
+/* Styles for invalid results (non-clickable cards) */
+.result-card.invalid {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+    cursor: not-allowed; /* Indicate non-clickable */
+    opacity: 0.6; /* Reduce opacity for disabled cards */
+    pointer-events: none; /* Disable all pointer events */
+}
+
+.result-card.invalid .graduation-status {
+    color: #888; /* Gray out text for invalid cards */
+}
+
+/* Styles for results with "⚠️ Data Unavailable" */
+.result-card.data-unavailable {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+    cursor: not-allowed; /* Indicate non-clickable */
+    opacity: 0.6; /* Reduce opacity for disabled cards */
+    pointer-events: none; /* Disable all pointer events */
+}
+
+.result-card.data-unavailable .graduation-status {
+    color: #888; /* Gray out text for data unavailable cards */
+}
+
+/* Additional data styles */
+.additional-data {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.result-card.expanded .additional-data {
+    max-height: 500px; /* Adjust based on your content */
+    margin-top: 16px;
+}
+
+/* Requirements section */
 .requirements-section {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
