@@ -123,6 +123,11 @@
     margin-top: 16px;
 }
 
+.scrollable-section {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
 /* Requirements section */
 .requirements-section {
     display: grid;
@@ -164,4 +169,13 @@
 .dark-mode .result-card {
     background-color: #383838;
     border-color: #4a4a4a;
+}
+
+.side-by-side {
+    display: flex;
+    justify-content: space-between;
+}
+
+.progress-section, .requirements-section {
+    width: 48%;
 }

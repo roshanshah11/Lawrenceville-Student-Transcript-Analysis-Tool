@@ -106,7 +106,7 @@ const MultiStudent = () => {
                     {Object.entries(results).map(([filename, data]) => {
                         const parts = filename.split("_");
                         const isExpanded = expandedCards[filename];
-                        const isDataAvailable = data?.graduation_check !== undefined; // Check if data is available
+                        const isDataAvailable = data?.graduation_check.met_all_requirements !== undefined;
     
                         return (
                             <div 
@@ -130,50 +130,52 @@ const MultiStudent = () => {
     
                                 {isExpanded && isDataAvailable && ( // Only render additional data if expanded and data is available
                                     <div className="additional-data">
-                                        <div className="progress-section">
-                                            <h5>Progress</h5>
-                                            <table>
-                                                <thead>
-                                                    <tr>
-                                                        <th>Requirement</th>
-                                                        <th>Status</th>
-                                                        <th>Progress</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {Object.entries(data.graduation_check.progress["Student Progress"]).map(([req, status]) => {
-                                                        const isMet = status.includes('✅');
-                                                        const progressText = status.split(":")[1].trim();
-                                                        return (
-                                                            <tr key={req} className={isMet ? "met" : "not-met"}>
-                                                                <td>{req}</td>
-                                                                <td>{isMet ? "✅ Met" : "❌ Not Met"}</td>
-                                                                <td>{progressText}</td>
-                                                            </tr>
-                                                        );
-                                                    })}
-                                                </tbody>
-                                            </table>
-                                        </div>
-    
-                                        <div className="requirements-section">
-                                            <h5>Graduation Requirements</h5>
-                                            <table>
-                                                <thead>
-                                                    <tr>
-                                                        <th>Requirement</th>
-                                                        <th>Credits Needed</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {Object.entries(data.graduation_check.requirements["Graduation Requirements"]).map(([req, credits]) => (
-                                                        <tr key={req}>
-                                                            <td>{req}</td>
-                                                            <td>{credits}</td>
+                                        <div className="side-by-side">
+                                            <div className="progress-section">
+                                                <h5>Progress</h5>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Requirement</th>
+                                                            <th>Status</th>
+                                                            <th>Progress</th>
                                                         </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody>
+                                                        {Object.entries(data.graduation_check.progress["Student Progress"]).map(([req, status]) => {
+                                                            const isMet = status.includes('✅');
+                                                            const progressText = status.split(":")[1].trim();
+                                                            return (
+                                                                <tr key={req} className={isMet ? "met" : "not-met"}>
+                                                                    <td>{req}</td>
+                                                                    <td>{isMet ? "✅ Met" : "❌ Not Met"}</td>
+                                                                    <td>{progressText}</td>
+                                                                </tr>
+                                                            );
+                                                        })}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                    
+                                            <div className="requirements-section">
+                                                <h5>Graduation Requirements</h5>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Requirement</th>
+                                                            <th>Credits Needed</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {Object.entries(data.graduation_check.requirements["Graduation Requirements"]).map(([req, credits]) => (
+                                                            <tr key={req}>
+                                                                <td>{req}</td>
+                                                                <td>{credits}</td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 )}
