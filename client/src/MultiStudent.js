@@ -98,7 +98,7 @@ const MultiStudent = () => {
 
     const renderResults = () => {
         if (!results) return null;
-    
+
         if (processType === 'individual') {
             return (
                 <div className="results-container">
@@ -106,8 +106,8 @@ const MultiStudent = () => {
                     {Object.entries(results).map(([filename, data]) => {
                         const parts = filename.split("_");
                         const isExpanded = expandedCards[filename];
-                        const isDataAvailable = data?.graduation_check.met_all_requirements !== undefined;
-    
+                        const isDataAvailable = data?.graduation_check?.met_all_requirements !== undefined;
+
                         return (
                             <div 
                                 key={filename} 
@@ -127,7 +127,7 @@ const MultiStudent = () => {
                                         <span className="status-unknown">⚠️ Data Unavailable</span>
                                     )}
                                 </div>
-    
+
                                 {isExpanded && isDataAvailable && ( // Only render additional data if expanded and data is available
                                     <div className="additional-data">
                                         <div className="side-by-side">
@@ -189,7 +189,7 @@ const MultiStudent = () => {
                 <div className="results-container">
                     <h3>Collective Analysis</h3>
                     {results ? (
-                        <img src={results} alt="GPA Distribution Histogram" className="results-image" />
+                        <img src={results} alt="Process Files to Create the Photo Here!!" className="results-image" />
                     ) : (
                         <p>No data available.</p>
                     )}
