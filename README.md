@@ -38,7 +38,8 @@ To install the project, follow these steps:
 To use the project, follow these steps:
 1. Start the backend server:
     ```bash
-    python flask_server/routes.py
+    cd flask_server
+    python routes.py
     ```
 2. Start the frontend application:
     ```bash
