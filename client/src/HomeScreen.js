@@ -3,25 +3,15 @@ import React, { useState, useEffect } from "react";
 const HomeScreen = ({ setPage }) => {
     // Typewriter effect logic
     const [text, setText] = useState("");
-    const [index, setIndex] = useState(0);
-    const [isDeleting, setIsDeleting] = useState(false);
     useEffect(() => {
         const type = () => {
-            const currentWord = "Lawrenceville Student Transcript Analysis Tool"
-            if (isDeleting) {
-
-            } else {
-                // Add character
-                setText(currentWord.substring(0, text.length + 1));
-                if (text === currentWord) {
-                    setIsDeleting(true);
-                }
-            }
+            const currentWord = "Lawrenceville Student Transcript Analysis Tool";
+            setText(currentWord.substring(0, text.length + 1));
         };
 
         const timeout = setTimeout(type, 100); 
         return () => clearTimeout(timeout);
-    }, [text, isDeleting, index]);
+    }, [text]);
 
     // Define animation styles
     const fadeInDown = {

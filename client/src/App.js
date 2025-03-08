@@ -91,7 +91,6 @@ function App() {
                                 className={`relative z-10 inline-flex items-center justify-center w-full px-8 py-3 text-sm font-semibold text-white transition-all duration-200 border-2 border-transparent sm:w-auto rounded-xl font-pj hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 ${
                                     darkMode ? "bg-gray-1000" : "bg-gray-900"
                                 }`}
-                                role="button"
                             >
                                 {darkMode ? "Light Mode" : "Dark Mode"}
                             </button>
