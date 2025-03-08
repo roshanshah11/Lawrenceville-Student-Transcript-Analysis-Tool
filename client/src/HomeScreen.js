@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const HomeScreen = ({ setPage }) => {
+    // Typewriter effect logic
+    const [text, setText] = useState("");
+    const [index, setIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+    useEffect(() => {
+        const type = () => {
+            const currentWord = "Lawrenceville Student Transcript Analysis Tool"
+            if (isDeleting) {
+
+            } else {
+                // Add character
+                setText(currentWord.substring(0, text.length + 1));
+                if (text === currentWord) {
+                    setIsDeleting(true);
+                }
+            }
+        };
+
+        const timeout = setTimeout(type, 100); 
+        return () => clearTimeout(timeout);
+    }, [text, isDeleting, index]);
+
     // Define animation styles
     const fadeInDown = {
         animation: "fade-in-down 1s ease-out",
@@ -66,9 +88,15 @@ const HomeScreen = ({ setPage }) => {
 
             {/* Hero Section */}
             <div className="text-center py-20">
-                <h1 className="text-5xl font-bold mb-6" style={fadeInDown}>
-                    Lawrenceville Student Transcript Analysis Tool
-                </h1>
+                <div className="w-full h-full flex justify-center items-center">
+                    <h1
+                        id="typewriter"
+                        className="text-5xl font-bold mb-6"
+                        style={fadeInDown}
+                    >
+                        {text}
+                    </h1>
+                </div>
                 <p className="text-xl mb-8" style={fadeInUp}>
                     Efficiently analyze and manage student transcripts with ease.
                 </p>

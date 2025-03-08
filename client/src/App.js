@@ -82,12 +82,20 @@ function App() {
                         ))}
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <button
-                            onClick={() => setDarkMode(!darkMode)}
-                            className="text-sm/6 font-semibold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400"
-                        >
-                            {darkMode ? "Light Mode" : "Dark Mode"}
-                        </button>
+                        <div className="relative">
+                            <div className="absolute -inset-5">
+                                <div className="w-full h-full max-w-sm mx-auto lg:mx-0 opacity-30 blur-lg bg-gradient-to-r from-yellow-400 via-pink-500 to-green-600"></div>
+                            </div>
+                            <button
+                                onClick={() => setDarkMode(!darkMode)}
+                                className={`relative z-10 inline-flex items-center justify-center w-full px-8 py-3 text-sm font-semibold text-white transition-all duration-200 border-2 border-transparent sm:w-auto rounded-xl font-pj hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 ${
+                                    darkMode ? "bg-gray-1000" : "bg-gray-900"
+                                }`}
+                                role="button"
+                            >
+                                {darkMode ? "Light Mode" : "Dark Mode"}
+                            </button>
+                        </div>
                     </div>
                 </nav>
 
@@ -154,7 +162,7 @@ function App() {
 
             {/* Footer */}
             <footer className={`App-footer p-4 text-center ${darkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"} shadow-lg transition-colors duration-200`}>
-                <p>&copy; 2023 Transcript Parser. All rights reserved.</p>
+                <p>&copy; 2025 Roshan & Tun Python Final All rights reserved.</p>
             </footer>
         </div>
     );

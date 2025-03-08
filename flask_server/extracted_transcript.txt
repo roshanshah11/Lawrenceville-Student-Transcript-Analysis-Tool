@@ -14,7 +14,7 @@ LA211 Spanish 1 A-
 MA321 Math 3X A
 SC205 Inquiries in Biological and Environmental Sciences A-
 VA200 Foundations Of Art I A-
-Term GPA: 4.00 Term GPA: 3.94 Term GPA: 3.80
+Term GPA: 4.00 Term GPA: 3.94 High Honors Term GPA: 3.80 High Honors
 Grade 10 2022-2023 Grade 10 Year Average: 3.84
 EN301 English III A-
 HI301 Forces That Shaped The Modern World A
@@ -32,7 +32,7 @@ LA311 Spanish 2 A-
 MA421 Precalculus BC A
 SC325 Inquiries in Chemical and Physical Sciences A+
 RP413 Ethics A-
-Term GPA: 3.78 Term GPA: 3.85 Term GPA: 3.90
+Term GPA: 3.78 High Honors Term GPA: 3.85 High Honors Term GPA: 3.90 High Honors
 Grade 11 2023-2024 Grade 11 Year Average: 3.88
 EN421 The Novel A-
 HI536 A History of American Democracy in Cases A
@@ -47,7 +47,22 @@ HI538 A History of American Democracy in Cases A
 LA413 Spanish 3 A-
 MA521 Honors Calculus BC A
 SC543 Honors Physics / Mechanics A
-Term GPA: 3.82 Term GPA: 3.88 Term GPA: 3.94
+Term GPA: 3.82 High Honors Term GPA: 3.88 High Honors Term GPA: 3.94 High Honors
+Grade 12 2024-2025 Grade 12 Year Average: 4.06
+EN537 From Dithyramb to Dr. Dre A
+IN505 Writings in International Strategy A
+MA527 Honors Calculus-Based Prob & Stats A+
+MA561 Javascript Programming A
+SC516 Honors Biology AIN506 Case Studies in International Strategy
+MA527 Honors Calculus-Based Probability And Statistics
+MA562 Python Programming
+SC517 Honors Biology
+SC561 Intro to Electrical EngineeringIN507 Case Studies in International Strategy
+MA527 Honors Calculus-Based Probability And Statistics
+MA563 Projects in Computer Programming
+SC518 Honors Biology
+SC563 Projects in Engineering
+Term GPA: 4.06 High Honors Term GPA: Term GPA:
 School is accredited by the
 Middle States Association
 Name: Roshan Amol Shah Will Graduate: May 2025 Sex: Male
