@@ -102,7 +102,7 @@ const MultiStudent = () => {
         if (processType === 'individual') {
             return (
                 <div className="results-container">
-                    <h3>Individual Results</h3>
+                    <h3 className="text-lg font-bold mb-4">Individual Results</h3>
                     {Object.entries(results).map(([filename, data]) => {
                         const parts = filename.split("_");
                         const isExpanded = expandedCards[filename];
@@ -132,13 +132,13 @@ const MultiStudent = () => {
                                     <div className="additional-data">
                                         <div className="side-by-side">
                                             <div className="progress-section">
-                                                <h5>Progress</h5>
-                                                <table>
+                                                <h5 className="font-bold mb-2">Progress</h5>
+                                                <table className="table-auto w-full">
                                                     <thead>
                                                         <tr>
-                                                            <th>Requirement</th>
-                                                            <th>Status</th>
-                                                            <th>Progress</th>
+                                                            <th className="px-4 py-2">Requirement</th>
+                                                            <th className="px-4 py-2">Status</th>
+                                                            <th className="px-4 py-2">Progress</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -146,10 +146,10 @@ const MultiStudent = () => {
                                                             const isMet = status.includes('✅');
                                                             const progressText = status.split(":")[1].trim();
                                                             return (
-                                                                <tr key={req} className={isMet ? "met" : "not-met"}>
-                                                                    <td>{req}</td>
-                                                                    <td>{isMet ? "✅ Met" : "❌ Not Met"}</td>
-                                                                    <td>{progressText}</td>
+                                                                <tr key={req} className={isMet ? "bg-green-100" : "bg-red-100"}>
+                                                                    <td className="border px-4 py-2">{req}</td>
+                                                                    <td className="border px-4 py-2">{isMet ? "✅ Met" : "❌ Not Met"}</td>
+                                                                    <td className="border px-4 py-2">{progressText}</td>
                                                                 </tr>
                                                             );
                                                         })}
@@ -158,19 +158,19 @@ const MultiStudent = () => {
                                             </div>
                     
                                             <div className="requirements-section">
-                                                <h5>Graduation Requirements</h5>
-                                                <table>
+                                                <h5 className="font-bold mb-2">Graduation Requirements</h5>
+                                                <table className="table-auto w-full">
                                                     <thead>
                                                         <tr>
-                                                            <th>Requirement</th>
-                                                            <th>Credits Needed</th>
+                                                            <th className="px-4 py-2">Requirement</th>
+                                                            <th className="px-4 py-2">Credits Needed</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         {Object.entries(data.graduation_check.requirements["Graduation Requirements"]).map(([req, credits]) => (
                                                             <tr key={req}>
-                                                                <td>{req}</td>
-                                                                <td>{credits}</td>
+                                                                <td className="border px-4 py-2">{req}</td>
+                                                                <td className="border px-4 py-2">{credits}</td>
                                                             </tr>
                                                         ))}
                                                     </tbody>
@@ -187,9 +187,9 @@ const MultiStudent = () => {
         } else {
             return (
                 <div className="results-container">
-                    <h3>Collective Analysis</h3>
+                    <h3 className="text-lg font-bold mb-4">Collective Analysis</h3>
                     {results ? (
-                        <img src={results} alt="Process Files to Create the Photo Here!!" className="results-image" />
+                        <img src={results} alt="Visual representation of the collective analysis results" className="results-image" />
                     ) : (
                         <p>No data available.</p>
                     )}
@@ -201,22 +201,22 @@ const MultiStudent = () => {
 
     return (
         <ErrorBoundary>
-            <div className="multi-student-container">
-                <h2>Multi-Student Transcript Processing</h2>
-                <form onSubmit={handleSubmit} className="upload-form">
-                    <div className="file-input-section">
-                        <label htmlFor="transcript-files">Select Transcript Folder:</label>
+            <div className="multi-student-container p-4">
+                <h2 className="text-xl font-bold mb-4">Multi-Student Transcript Processing</h2>
+                <form onSubmit={handleSubmit} className="upload-form bg-white p-4 rounded shadow-md">
+                    <div className="file-input-section mb-4">
+                        <label htmlFor="transcript-files" className="block mb-2">Select Transcript Folder:</label>
                         <input
                             type="file"
                             id="transcript-files"
                             webkitdirectory="true"
                             directory="true"
                             onChange={handleFileChange}
-                            className="file-input"
+                            className="file-input w-full p-2 border rounded"
                         />
                     </div>
-                    <div className="process-options">
-                        <label>
+                    <div className="process-options flex gap-4 mb-4">
+                        <label className="flex items-center gap-2">
                             <input
                                 type="radio"
                                 value="individual"
@@ -225,7 +225,7 @@ const MultiStudent = () => {
                             />
                             Process Individually
                         </label>
-                        <label>
+                        <label className="flex items-center gap-2">
                             <input
                                 type="radio"
                                 value="collective"
@@ -235,11 +235,11 @@ const MultiStudent = () => {
                             Process Collectively
                         </label>
                     </div>
-                    <button type="submit" disabled={files.length === 0 || loading} className="submit-button">
+                    <button type="submit" disabled={files.length === 0 || loading} className="submit-button bg-blue-500 text-white px-4 py-2 rounded">
                         {loading ? 'Processing...' : 'Process Files'}
                     </button>
                 </form>
-                {error && <div className="error-message">{error}</div>}
+                {error && <div className="error-message text-red-500 mt-4">{error}</div>}
                 {renderResults()}
             </div>
         </ErrorBoundary>

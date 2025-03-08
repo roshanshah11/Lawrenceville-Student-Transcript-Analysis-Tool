@@ -33,6 +33,11 @@ To install the project, follow these steps:
     cd client
     npm install
     ```
+5. Install Tailwind CSS and its dependencies:
+    ```bash
+    npm install -D tailwindcss postcss autoprefixer
+    npx tailwindcss init -p
+    ```
 
 ## Usage
 To use the project, follow these steps:

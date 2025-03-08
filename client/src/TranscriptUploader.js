@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./TranscriptUploader.css";
 
 const TranscriptUploader = () => {
     const [file, setFile] = useState(null);
@@ -46,13 +45,15 @@ const TranscriptUploader = () => {
 
     const renderGrades = (grades) => {
         return (
-            <div className="grades-grid">
+            <div className="grid grid-cols-2 gap-4">
                 {grades.Grades.map((grade, index) => (
-                    <div key={index} className="card" onClick={() => setSelectedGrade(grade)}>
-                        <div className="container-card">
-                            <div className="grade-header">
-                                <h4>Grade {grade["Grade Level"]} ({grade.Year})</h4>
-                            </div>
+                    <div
+                        key={index}
+                        className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform"
+                        onClick={() => setSelectedGrade(grade)}
+                    >
+                        <div className="text-center">
+                            <h4 className="font-bold">Grade {grade["Grade Level"]} ({grade.Year})</h4>
                         </div>
                     </div>
                 ))}
@@ -62,79 +63,108 @@ const TranscriptUploader = () => {
 
     const renderGraduationCheck = (graduationCheck) => {
         return (
-            <div className="graduation-check">
-                <h3>Graduation Requirements For The Student</h3>
-                <ul>
+            <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+                <h3 className="text-xl font-bold mb-4">Graduation Requirements For The Student</h3>
+                <ul className="space-y-2">
                     {Object.entries(graduationCheck.requirements["Graduation Requirements"]).map(([category, count], index) => (
-                        <li key={index}>{category}: {count} required</li>
+                        <li key={index} className="text-gray-700">
+                            {category}: {count} required
+                        </li>
                     ))}
                 </ul>
-                <h3>Student Progress</h3>
-                <ul>
+                <h3 className="text-xl font-bold mt-6 mb-4">Student Progress</h3>
+                <ul className="space-y-2">
                     {Object.entries(graduationCheck.progress["Student Progress"]).map(([category, status], index) => (
-                        <li key={index}>{status}</li>
+                        <li key={index} className="text-gray-700">
+                            {status}
+                        </li>
                     ))}
                 </ul>
-                <h3>Status</h3>
-                <p>{graduationCheck.met_all_requirements ? "This student is ready to graduate!" : "Please meet the requirements above!"}</p>
+                <h3 className="text-xl font-bold mt-6 mb-4">Status</h3>
+                <p className={`text-lg ${graduationCheck.met_all_requirements ? "text-green-600" : "text-red-600"}`}>
+                    {graduationCheck.met_all_requirements ? "This student is ready to graduate!" : "Please meet the requirements above!"}
+                </p>
             </div>
         );
     };
 
     return (
-        <div className="container">
-            <div className="background">
-                <h2>Upload Transcript</h2>
-                <input type="file" onChange={handleFileChange} accept=".pdf" />
-                <button onClick={handleUpload} disabled={loading}>
+        <div className="container mx-auto p-4">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+                <h2 className="text-2xl font-bold mb-4">Upload Transcript</h2>
+                <input
+                    type="file"
+                    onChange={handleFileChange}
+                    accept=".pdf"
+                    className="mb-4 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                />
+                <button
+                    onClick={handleUpload}
+                    disabled={loading}
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-blue-300"
+                >
                     {loading ? "Processing..." : "Upload"}
                 </button>
                 {loading && (
-                    <div className="loading">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <div className="flex justify-center mt-4">
+                        <div className="loading flex space-x-2">
+                            {[...Array(5)].map((_, i) => (
+                                <div
+                                    key={i}
+                                    className="w-2 h-8 bg-blue-500 animate-bounce"
+                                    style={{ animationDelay: `${i * 0.1}s` }}
+                                ></div>
+                            ))}
+                        </div>
                     </div>
                 )}
-                {!loading && error && <p style={{ color: "red" }}>{error}</p>}
+                {!loading && error && <p className="text-red-500 mt-4">{error}</p>}
                 {!loading && showGrades && grades && (
-                    <div className="results-container">
-                        <div className="grades-section">
-                            <h3>Extracted Grades</h3>
-                            <div className="grid">
-                                {renderGrades(grades.grades)}
-                            </div>
+                    <div className="mt-6">
+                        <div className="mb-8">
+                            <h3 className="text-xl font-bold mb-4">Extracted Grades</h3>
+                            {renderGrades(grades.grades)}
                         </div>
-                        <div className="graduation-check-container">
-                            <h3>Graduation Check</h3>
+                        <div>
+                            <h3 className="text-xl font-bold mb-4">Graduation Check</h3>
                             {renderGraduationCheck(grades.graduation_check)}
                         </div>
                     </div>
                 )}
                 {selectedGrade && (
-                    <div className="popup">
-                        <div className="popup-content">
-                            <span className="close" onClick={() => setSelectedGrade(null)}>&times;</span>
-                            <h4>Grade {selectedGrade["Grade Level"]} ({selectedGrade.Year})</h4>
-                            <p>Year Average: {selectedGrade["Year Average"]}</p>
-                            <h5>Term GPAs:</h5>
-                            <div className="gpa-grid">
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+                        <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full relative">
+                            <button
+                                onClick={() => setSelectedGrade(null)}
+                                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                            >
+                                &times;
+                            </button>
+                            <h4 className="text-xl font-bold mb-4">Grade {selectedGrade["Grade Level"]} ({selectedGrade.Year})</h4>
+                            <p className="mb-4">Year Average: {selectedGrade["Year Average"]}</p>
+                            <h5 className="font-bold mb-2">Term GPAs:</h5>
+                            <div className="grid grid-cols-2 gap-2 mb-4">
                                 {selectedGrade["Term GPAs"].map((gpa, idx) => (
-                                    <div key={idx}>{gpa}</div>
-                                ))}
-                            </div>
-                            <h5>Courses:</h5>
-                            <div className="course-grid">
-                                {selectedGrade.Courses.map((course, idx) => (
-                                    <div key={idx} className="course-item">
-                                        <span className="course-name">{course.Course}:</span>
-                                        <span className="course-grade">{course.Grade}</span>
+                                    <div key={idx} className="bg-gray-50 p-2 rounded">
+                                        {gpa}
                                     </div>
                                 ))}
                             </div>
-                            <button onClick={() => setSelectedGrade(null)}>Close</button>
+                            <h5 className="font-bold mb-2">Courses:</h5>
+                            <div className="space-y-2">
+                                {selectedGrade.Courses.map((course, idx) => (
+                                    <div key={idx} className="flex justify-between bg-gray-50 p-2 rounded">
+                                        <span className="font-bold">{course.Course}:</span>
+                                        <span className="italic">{course.Grade}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <button
+                                onClick={() => setSelectedGrade(null)}
+                                className="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600"
+                            >
+                                Close
+                            </button>
                         </div>
                     </div>
                 )}
