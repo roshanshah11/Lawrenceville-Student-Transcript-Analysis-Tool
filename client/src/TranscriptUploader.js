@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const TranscriptUploader = () => {
+const TranscriptUploader = ({ darkMode }) => {
     const [file, setFile] = useState(null);
     const [grades, setGrades] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -49,7 +49,9 @@ const TranscriptUploader = () => {
                 {grades.Grades.map((grade, index) => (
                     <div
                         key={index}
-                        className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform"
+                        className={`p-4 rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform ${
+                            darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
+                        }`}
                         onClick={() => setSelectedGrade(grade)}
                     >
                         <div className="text-center">
@@ -63,11 +65,11 @@ const TranscriptUploader = () => {
 
     const renderGraduationCheck = (graduationCheck) => {
         return (
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+            <div className={`p-6 rounded-lg shadow-md ${darkMode ? "bg-gray-700 text-white" : "bg-gray-50 text-gray-800"}`}>
                 <h3 className="text-xl font-bold mb-4">Graduation Requirements For The Student</h3>
                 <ul className="space-y-2">
                     {Object.entries(graduationCheck.requirements["Graduation Requirements"]).map(([category, count], index) => (
-                        <li key={index} className="text-gray-700">
+                        <li key={index}>
                             {category}: {count} required
                         </li>
                     ))}
@@ -75,7 +77,7 @@ const TranscriptUploader = () => {
                 <h3 className="text-xl font-bold mt-6 mb-4">Student Progress</h3>
                 <ul className="space-y-2">
                     {Object.entries(graduationCheck.progress["Student Progress"]).map(([category, status], index) => (
-                        <li key={index} className="text-gray-700">
+                        <li key={index}>
                             {status}
                         </li>
                     ))}
@@ -90,8 +92,8 @@ const TranscriptUploader = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-                <h2 className="text-2xl font-bold mb-4">Upload Transcript</h2>
+            <div className={`p-6 rounded-lg shadow-md ${darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"}`}>
+                <h2 className="text-2xl font-bold mb-4">Single Student Transcript Processing</h2>
                 <input
                     type="file"
                     onChange={handleFileChange}
@@ -133,7 +135,9 @@ const TranscriptUploader = () => {
                 )}
                 {selectedGrade && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-                        <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full relative">
+                        <div className={`p-6 rounded-lg shadow-lg max-w-md w-full max-h-[90vh] overflow-y-auto ${
+                            darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
+                        }`}>
                             <button
                                 onClick={() => setSelectedGrade(null)}
                                 className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
@@ -145,7 +149,7 @@ const TranscriptUploader = () => {
                             <h5 className="font-bold mb-2">Term GPAs:</h5>
                             <div className="grid grid-cols-2 gap-2 mb-4">
                                 {selectedGrade["Term GPAs"].map((gpa, idx) => (
-                                    <div key={idx} className="bg-gray-50 p-2 rounded">
+                                    <div key={idx} className={`p-2 rounded ${darkMode ? "bg-gray-700" : "bg-gray-50"}`}>
                                         {gpa}
                                     </div>
                                 ))}
@@ -153,7 +157,7 @@ const TranscriptUploader = () => {
                             <h5 className="font-bold mb-2">Courses:</h5>
                             <div className="space-y-2">
                                 {selectedGrade.Courses.map((course, idx) => (
-                                    <div key={idx} className="flex justify-between bg-gray-50 p-2 rounded">
+                                    <div key={idx} className={`flex justify-between p-2 rounded ${darkMode ? "bg-gray-700" : "bg-gray-50"}`}>
                                         <span className="font-bold">{course.Course}:</span>
                                         <span className="italic">{course.Grade}</span>
                                     </div>
