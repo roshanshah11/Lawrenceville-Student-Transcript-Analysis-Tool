@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "visualstudioexptteam.vscodeintellicode-completions"
+        "visualstudioexptteam.vscodeintellicode-completions",
+        "esbenp.prettier-vscode"
     ]
 }
